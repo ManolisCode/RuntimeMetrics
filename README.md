@@ -1,7 +1,6 @@
 # RuntimeMetrics
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/manoliscode/runtime-metrics.svg?style=flat-square)](https://packagist.org/packages/manoliscode/runtime-metrics)
-[![PHP Version](https://img.shields.io/packagist/php-v/manoliscode/runtime-metrics.svg?style=flat-square)](https://packagist.org/packages/manoliscode/runtime-metrics)
+[![Stable Version](https://img.shields.io/packagist/v/manoliscode/runtime-metrics/stable.svg?style=flat-square)](https://packagist.org/packages/manoliscode/runtime-metrics)
 [![CI](https://github.com/ManolisCode/RuntimeMetrics/workflows/CI/badge.svg)](https://github.com/ManolisCode/RuntimeMetrics/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![codecov](https://codecov.io/gh/ManolisCode/RuntimeMetrics/branch/main/graph/badge.svg?token=RJMYG1E1P0)](https://codecov.io/gh/ManolisCode/RuntimeMetrics)
