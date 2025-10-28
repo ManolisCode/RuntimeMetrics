@@ -95,8 +95,6 @@ class RuntimeMetricsTest extends TestCase
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage("Timer 'default' has not been started.");
-
-        // Call stop without starting the timer
         $this->metrics->stop('default');
     }
 
@@ -104,8 +102,6 @@ class RuntimeMetricsTest extends TestCase
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage("Timer 'default' has not been started.");
-
-        // Call lap without starting the timer
         $this->metrics->lap('default');
     }
 
@@ -113,8 +109,6 @@ class RuntimeMetricsTest extends TestCase
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage("Timer 'default' has not been started.");
-
-        // Call getDuration without starting the timer
         $this->metrics->getDuration('default');
     }
 
@@ -122,8 +116,6 @@ class RuntimeMetricsTest extends TestCase
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage("Timer 'default' has not been started.");
-
-        // Call getMemoryUsage without starting the timer
         $this->metrics->getMemoryUsage('default');
     }
 
@@ -131,18 +123,13 @@ class RuntimeMetricsTest extends TestCase
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage("Timer 'default' has not been started.");
-
-        // Call getPeakMemoryUsage without starting the timer
         $this->metrics->getPeakMemoryUsage('default');
     }
 
     public function testGetPeakMemoryUsageUsesMemoryGetPeakUsageIfEndPeakNotSet(): void
     {
         $this->metrics->start('default');
-
-        // Do NOT stop the timer, so 'endPeak' is not set
         $result = $this->metrics->getPeakMemoryUsage('default', false);
-
         $this->assertIsInt($result);
         $this->assertGreaterThan(0, $result);
     }
@@ -151,13 +138,8 @@ class RuntimeMetricsTest extends TestCase
     {
         $this->metrics->start('timer1');
         $this->metrics->start('timer2');
-
-        // Ensure both timers exist
         $this->assertCount(2, $this->metrics->getTimers());
-
-        // Reset only 'timer1'
         $this->metrics->reset('timer1');
-
         $timers = $this->metrics->getTimers();
         $this->assertNotContains('timer1', $timers);
         $this->assertContains('timer2', $timers);
@@ -169,22 +151,15 @@ class RuntimeMetricsTest extends TestCase
     {
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage("Timer 'nonexistent' not found.");
-
-        // Call report() on a timer that does not exist
         $this->metrics->report('nonexistent');
     }
 
     public function testReportAllGeneratesOutput(): void
     {
-        // Measure a timer so timers array is not empty
         $this->metrics->measure(fn() => usleep(10000), 'timer1');
-
         $output = $this->metrics->reportAll();
-
         $this->assertStringContainsString('timer1', $output);
         $this->assertIsString($output);
         $this->assertNotEmpty($output);
     }
-
-
 }
